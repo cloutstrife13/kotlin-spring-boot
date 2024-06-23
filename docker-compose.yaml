@@ -1,0 +1,31 @@
+# Use postgres/example user/password credentials
+version: '3.9'
+
+services:
+
+  books-service:
+    container_name: books-service
+    build:
+      context: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - kotlin-spring
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=books
+    networks:
+      - kotlin-spring
+
+networks:
+  kotlin-spring:
