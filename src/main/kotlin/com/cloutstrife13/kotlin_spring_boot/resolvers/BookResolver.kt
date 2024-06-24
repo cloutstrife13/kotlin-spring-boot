@@ -1,7 +1,8 @@
-package com.cloutstrife13.kotlin_spring_boot.resolver
+package com.cloutstrife13.kotlin_spring_boot.resolvers
 
-import com.cloutstrife13.kotlin_spring_boot.model.Book
-import com.cloutstrife13.kotlin_spring_boot.service.BookService
+import com.cloutstrife13.kotlin_spring_boot.models.BookDTO
+import com.cloutstrife13.kotlin_spring_boot.services.BookService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping
 import org.springframework.graphql.data.method.annotation.QueryMapping
@@ -10,21 +11,21 @@ import java.util.*
 
 @Controller
 class BookResolver(
-    private val bookService: BookService
+    @Autowired private val bookService: BookService
 ) {
 
     @QueryMapping
-    fun getAllBooks(): List<Book> {
+    fun getAllBooks(): List<BookDTO> {
         return bookService.getAllBooks()
     }
 
     @QueryMapping
-    fun getBookById(@Argument id: UUID): Book? {
+    fun getBookById(@Argument id: Int): BookDTO? {
         return bookService.getBookById(id)
     }
 
     @MutationMapping
-    fun createBook(@Argument title: String, @Argument description: String?): Book {
+    fun createBook(@Argument title: String, @Argument description: String?): BookDTO {
         return bookService.createBook(title, description)
     }
 }

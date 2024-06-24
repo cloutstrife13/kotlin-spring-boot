@@ -1,12 +1,12 @@
 type Book {
-  id: ID!
+  id: Int!
   title: String!
   description: String
 }
 
 type Query {
   getAllBooks: [Book]!
-  getBookById(id: ID!): Book
+  getBookById(id: Int!): Book
 }
 
 type Mutation {
