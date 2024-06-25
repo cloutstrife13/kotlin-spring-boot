@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: kotlin-spring-boot
+  graphql:
+    path: '/graphql'
+    graphiql:
+      enabled: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/books}
+    username: ${DB_USERNAME:admin}
+    password: ${DB_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+app:
+  db:
+    init:
+      enabled: true

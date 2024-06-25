@@ -1,14 +1,18 @@
-# Use postgres/example user/password credentials
-version: '3.9'
-
 services:
-
   books-service:
     container_name: books-service
     build:
       context: ./
+      args:
+        DB_URL: ${DB_URL}
+        DB_USERNAME: ${DB_USERNAME}
+        DB_PASSWORD: ${DB_PASSWORD}
     ports:
       - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/books
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
     depends_on:
       - postgres
     networks:
